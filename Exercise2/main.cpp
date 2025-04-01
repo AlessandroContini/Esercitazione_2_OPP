@@ -49,7 +49,7 @@ public:
 		return *this;
 	}
 	
-	complex_number& operator+(const complex_number& other) const{
+	complex_number operator+(const complex_number& other) const{
 		complex_number sum = *this;
         sum += other;
         return sum;
@@ -66,7 +66,7 @@ public:
 		return *this;
 	}
 	
-	complex_number& operator*(const complex_number& other) const{
+	complex_number operator*(const complex_number& other) const{
 		complex_number prod = *this;
 		prod *= other;
 		return prod;
@@ -92,11 +92,11 @@ operator*(const T& i, const complex_number<T>& r)
 //4: overload dell'operatore <<
 template<typename T>
 ostream& operator<<(ostream& os, const complex_number<T>& c){
-	os << c.real;
-	if (c.imag >= 0)
-		os << "+" << c.imag << "i";
+	os << c.reale();
+	if (c.immaginaria() >= 0)
+		os << "+" << c.immaginaria() << "i";
 	else
-		os << c.imag << "i";
+		os << c.immaginaria() << "i";
 	
 	return os;
 }
@@ -104,5 +104,16 @@ ostream& operator<<(ostream& os, const complex_number<T>& c){
 
 int main()
 {
+	complex_number<float> c1(1.0f, 2.0f);
+	complex_number<float> c2(1.8f, -2.5f);
+	
+	cout << "c1: " << c1 << endl;
+	cout << "c2: " << c2 << endl;
+	cout << "c1 + c2: " << c1 + c2 << endl;
+	cout << "c1 * c2: " << c1 * c2 << endl;
+	cout << "Parte reale di c1: " << c1.reale() << endl;
+	cout << "Parte immaginaria di c1: " << c1.immaginaria() << endl;
+	cout << "Coniugato di c1: " << c1.coniugato() << endl;
+	
 	return 0;
 }
